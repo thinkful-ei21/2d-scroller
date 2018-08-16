@@ -3,12 +3,27 @@ import pygame
 # initializes pygame
 pygame.init()
 
-gameDisplay = pygame.display.set_mode((800, 600))
-pygame.display.set_caption('James\' Game')
+display_width = 800
+display_height =  600
 
+gameDisplay = pygame.display.set_mode((display_width, display_height))
+pygame.display.set_caption('Awesome 2D Side-Scroller!!')
+
+
+black = (0,0,0)
+white = (255,255,255)
+
+# creates an object to help track time
 clock = pygame.time.Clock()
-
 crashed = False
+carImg = pygame.image.load('racecar.png')
+
+def car(x,y): 
+    # carImg is source, x,y tuple is the destiny of the image
+    gameDisplay.blit(carImg, (x,y))
+
+
+
 while not crashed:
 
     for event in pygame.event.get():
