@@ -53,9 +53,6 @@ def game_loop():
 
         # once the character gets to the right border
         # it jumps back to the left
-        if x + charWidth > display_width:
-            x = 0
-            
         # adds the x_change to x to move
         x += x_change
         gameDisplay.fill(white)
@@ -63,6 +60,10 @@ def game_loop():
         # calls the function, which draws the char
         drawSprite(x,y)
 
+        if x + charWidth > display_width:
+            x_change = 0
+            x = x - 5
+            
         # updates the display after filling the background with white
         pygame.display.update()
         clock.tick(60)
