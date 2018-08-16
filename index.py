@@ -45,7 +45,7 @@ def game_loop():
                     x_change = -5
 
                 elif event.key == pygame.K_RIGHT:
-                    x_change = 5
+                        x_change = 5
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -60,9 +60,19 @@ def game_loop():
         # calls the function, which draws the char
         drawSprite(x,y)
 
+        # if the char gets to the ride boundary,
+        # set the x_change to 0
+        # and subtract 5 from x to reverse the K_RIGHT event
         if x + charWidth > display_width:
             x_change = 0
             x = x - 5
+        
+        # once the char position is less than 20
+        # reset the position 
+        # prevents movement beyond that left border
+        if x < 20:
+            x_change = 0
+            x = x + 5
             
         # updates the display after filling the background with white
         pygame.display.update()
