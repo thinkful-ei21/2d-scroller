@@ -30,12 +30,12 @@ def game_loop():
     y = 450
 
     x_change = 0
-    crashed = False
+    gameExit = False
 
-    while not crashed:
+    while not gameExit:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                crashed = True
+                gameExit = True
             
             # when a button is pressed
             if event.type == pygame.KEYDOWN:
@@ -55,6 +55,7 @@ def game_loop():
         # it jumps back to the left
         if x + charWidth > display_width:
             x = 0
+            
         # adds the x_change to x to move
         x += x_change
         gameDisplay.fill(white)
