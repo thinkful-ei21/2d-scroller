@@ -18,6 +18,9 @@ clock = pygame.time.Clock()
 crashed = False
 charImg = pygame.image.load('8bit-mario.png')
 
+# width of the sprite in pixels
+charWidth = 80
+
 def drawSprite(x,y): 
     # carImg is source, x,y tuple is the destiny of the image
     gameDisplay.blit(charImg, (x,y))
@@ -37,6 +40,7 @@ while not crashed:
         # when a button is pressed
         if event.type == pygame.KEYDOWN:
 
+            # if the button pressed is a left
             if event.key == pygame.K_LEFT:
                 print('left button')
                 x_change = -5
@@ -49,7 +53,11 @@ while not crashed:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 x_change = 0
 
-    
+    # once the character gets to the right border
+    # it jumps back to the left
+    if x + charWidth > display_width:
+        x = 0
+    # adds the x_change to x to mov
     x += x_change
     gameDisplay.fill(white)
     
