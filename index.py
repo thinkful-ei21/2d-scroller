@@ -34,11 +34,12 @@ while not crashed:
         if event.type == pygame.QUIT:
             crashed = True
         
+        # when a button is pressed
         if event.type == pygame.KEYDOWN:
+
             if event.key == pygame.K_LEFT:
                 print('left button')
                 x_change = -5
-
 
             elif event.key == pygame.K_RIGHT:
                 print('right button')
@@ -48,7 +49,8 @@ while not crashed:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 x_change = 0
 
-        
+    
+    x += x_change
     gameDisplay.fill(white)
     
     #draws the char
