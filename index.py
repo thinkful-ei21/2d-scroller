@@ -1,4 +1,5 @@
 import pygame
+import time
 
 # initializes pygame
 pygame.init()
@@ -9,9 +10,10 @@ display_height =  600
 gameDisplay = pygame.display.set_mode((display_width, display_height))
 pygame.display.set_caption('Awesome 2D Side-Scroller!!')
 
-# defines black and white with rGBA
-black = (0,0,0)
-white = (255,255,255)
+# defines colors with rGBA
+black = (0, 0, 0)
+white = (255, 255, 255)
+red = (255, 0, 0)
 
 # creates an object to help track time
 clock = pygame.time.Clock()
@@ -24,9 +26,28 @@ def drawSprite(x,y):
     # carImg is source, x,y tuple is the destiny of the image
     gameDisplay.blit(charImg, (x,y))
 
+def text_objects(text, font):
+    textSurface = font.render(text, True, black)
+    return textSurface, textSurface.get_rect()
+
+def message_display(text):
+    largeText = pygame.font.Font('freesansbold.ttf', 30)
+    TextSurf, TextRect = text_objects(text, largeText)
+    TextRect.center = ((display_width / 2), (display_height / 2))
+    gameDisplay.blit(TextSurf, TextRect)
+
+    # updates the game display, it doesn't auto-update
+    pygame.display.update()
+    time.sleep(2)
+
+    game_loop()
+
+def charDeath():
+    message_display('You died!')
+
 def game_loop():
     # location for sprite to appear
-    x = 20
+    x_position = 20
     y = 450
 
     x_change = 0
@@ -54,25 +75,26 @@ def game_loop():
         # once the character gets to the right border
         # it jumps back to the left
         # adds the x_change to x to move
-        x += x_change
+        x_position += x_change
         gameDisplay.fill(white)
         
         # calls the function, which draws the char
-        drawSprite(x,y)
+        drawSprite(x_position,y)
 
         # if the char gets to the ride boundary,
         # set the x_change to 0
         # and subtract 5 from x to reverse the K_RIGHT event
-        if x + charWidth > display_width:
+        if x_position + charWidth > display_width:
             x_change = 0
-            x = x - 5
+            x_position = x_position - 5
+            # charDeath()
         
         # once the char position is less than 20
         # reset the position 
         # prevents movement beyond that left border
-        if x < 20:
+        if x_position < 20:
             x_change = 0
-            x = x + 5
+            x_position = x_position + 5
             
         # updates the display after filling the background with white
         pygame.display.update()
