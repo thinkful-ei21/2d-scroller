@@ -66,7 +66,7 @@ def game_loop():
                     x_change = -5
 
                 elif event.key == pygame.K_RIGHT:
-                        x_change = 5
+                    x_change = 5
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
