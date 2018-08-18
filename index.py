@@ -51,6 +51,7 @@ def game_loop():
     y = 450
 
     x_change = 0
+    y_change = 0
     gameExit = False
 
     while not gameExit:
@@ -67,15 +68,29 @@ def game_loop():
 
                 elif event.key == pygame.K_RIGHT:
                     x_change = 5
+                
+                elif event.key == pygame.K_UP:
+                    
+                    y_change = -5
+                    # y += y_change
+                    # pygame.display.update()
+                    # while y < 450:
+                    #     pygame.display.update()
+
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     x_change = 0
+                
+                if event.key == pygame.K_UP:
+                    y_change = 5
 
         # once the character gets to the right border
         # it jumps back to the left
         # adds the x_change to x to move
         x_position += x_change
+        y += y_change
+
         gameDisplay.fill(white)
         
         # calls the function, which draws the char
@@ -95,6 +110,9 @@ def game_loop():
         if x_position < 20:
             x_change = 0
             x_position = x_position + 5
+
+        if y > 450:
+            y_change = 0
             
         # updates the display after filling the background with white
         pygame.display.update()
